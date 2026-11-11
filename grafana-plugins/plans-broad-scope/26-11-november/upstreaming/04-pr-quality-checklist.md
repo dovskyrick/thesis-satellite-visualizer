@@ -6,6 +6,7 @@
 - Branch from latest upstream `main`, one feature only.
 - `npm run lint`, `npm run typecheck`, `npm run test:ci` all green; `npm run build` works.
 - New logic lives in small files with unit tests; Resium mocked like the existing test.
+- No new E2E tests (working agreement in `README.md`); Ricardo's human-test checklist done and passed.
 - No `console.log`, no `localStorage`, no fork-only options.
 - New options default to current behaviour (existing dashboards unchanged).
 - Existing 8-column data still works.

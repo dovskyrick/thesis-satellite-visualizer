@@ -18,6 +18,7 @@ one feature per pull request. This branch (`upstreaming`) only holds planning ma
 | `08-best-practices-primer.md` | General engineering, testing, TS and React practices, applied here |
 | `09-open-space-collective-practices.md` | House practices of Lucas's organisation |
 | `10-pr1-issue-draft.md` | Issue text to open before the body-axes PR |
+| `11-pr1-human-test.md` | Ricardo's manual test checklist for body axes |
 
 ## Two sides, two standards
 
@@ -25,6 +26,17 @@ one feature per pull request. This branch (`upstreaming`) only holds planning ma
 
 **Upstream (Lucas):** one feature per PR, small diff, tests, README section,
 conventional-commit messages (`feat:`, `fix:`, `test:`), lint + typecheck + tests green.
+
+## Working agreement (2026-11-11)
+
+- **Claude writes and runs unit tests only** (Jest: pure functions, plus components with Resium faked).
+  It does not write new E2E/Playwright tests or run Grafana for visual checks.
+- **Ricardo does the user testing**: runs Grafana, looks at the result, decides if it's right.
+  Each PR gets a short human-test checklist here (e.g. `11-…`).
+- Lucas's existing CI (including its E2E smoke test) still runs on every PR; we just don't extend it.
+- Why: AI-generated E2E suites are slow and brittle and can bottleneck development. Unit tests
+  plus a human eye cover correctness at MVP speed.
+- Planning lives here (thesis repo, `upstreaming` branch); Lucas's repo only gets clean feature code.
 
 ## Workflow per feature
 

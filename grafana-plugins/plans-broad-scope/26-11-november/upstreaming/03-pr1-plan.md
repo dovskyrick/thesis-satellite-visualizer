@@ -37,7 +37,12 @@ Wire it into `SatelliteVisualizer.tsx` behind `options.showBodyAxes`.
 Unit tests for `axisEndpoint`: identity quaternion gives +X/+Y/+Z; 90° about Z maps
 X→Y; output length matches input. Render test (Resium mocked, like the existing
 test) checks axes render only when the option is on. Run `lint`, `typecheck`,
-`test:ci`, and the Playwright smoke test.
+`test:ci`. Visual check is Ricardo's (see `11-pr1-human-test.md`).
+
+**Status 2026-11-11:** implemented on `dovskyrick/satellite-visualizer` branch
+`feat/body-axes` (commit `ae4a246`). Arrow length is in pixels via Cesium's public
+`camera.getPixelSize`, matching `modelMinimumPixelSize`. 18/18 tests pass, and lint,
+typecheck, prettier and build are clean.
 
 ## Open question for Lucas
 

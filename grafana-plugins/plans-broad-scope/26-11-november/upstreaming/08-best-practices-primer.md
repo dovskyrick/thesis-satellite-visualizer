@@ -15,8 +15,9 @@ before the next starts. If one PR grows past ~400 changed lines, split it.
 
 For us, the high-value tests are **unit tests of pure functions**: maths, parsing,
 frame conversion. They're fast, exact and never flaky. Next come **render tests**
-with Resium mocked: is the component shown or hidden by its option? Last is one
-**E2E smoke test** (upstream's Playwright) proving the panel loads in real Grafana.
+with Resium mocked: is the component shown or hidden by its option? Lucas's existing
+**E2E smoke test** (Playwright) already proves the panel loads in real Grafana. Per our
+working agreement we don't add E2E tests; visual correctness is checked by a human.
 Don't test Cesium's pixels or Cesium itself.
 *Review question: is every formula covered by a test with a hand-checked number?*
 
