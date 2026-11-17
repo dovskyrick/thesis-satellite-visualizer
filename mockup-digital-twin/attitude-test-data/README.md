@@ -4,6 +4,8 @@ Fictional data in Lucas Brémond's 8-column format, with attitudes whose correct
 known in advance. Use it to check by eye that the plugin turns quaternions the right way.
 The maths lives in `MATHS.md`. This file covers what to do and what to look for.
 
+**Status:** all three profiles were manually tested and validated in Lucas's plugin (2026-11-17).
+
 ## What it is
 
 A pure-Python script (no installs) writes three CSVs and one Grafana dashboard. A and C

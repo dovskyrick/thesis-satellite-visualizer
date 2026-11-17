@@ -55,7 +55,10 @@ at every zoom level, which is the intended behaviour (length is set in pixels). 
 issue (`10-…`) and open the PR. For deeper attitude checks, use the profiles in
 `mockup-digital-twin/attitude-test-data/` (LVLH nadir, inertial, Lisbon tracking).
 
-## Attitude profiles (2026-11-17)
+## Attitude profiles (2026-11-17): all three passed
+
+**Final result:** Ricardo manually tested and validated all three trajectories (A, B and C).
+The history below is kept for the record.
 
 Ricardo loaded the three CSVs from `mockup-digital-twin/attitude-test-data/`.
 
@@ -77,3 +80,5 @@ treat it as a data or test-design problem, not a plugin bug.
 **Update:** Ricardo re-checked B fully zoomed out, and it is almost certainly correct. For an easier
 retest, B now flies a 10° near-equatorial orbit (`B-inertial-equatorial.csv`). Z stays flat, pointing north (80–100°
 from local up), and X/Y turn around it once per orbit.
+
+**Final:** B on the equatorial orbit was confirmed working. All three profiles are validated, and PR 1 manual testing is complete.

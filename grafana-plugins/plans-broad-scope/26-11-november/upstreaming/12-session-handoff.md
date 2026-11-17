@@ -18,7 +18,9 @@ If a repo was renamed on GitHub, the old URL redirects. Attach it with `add_repo
 - PR 1 (body axes) is implemented, commit `ae4a246`. 18/18 tests pass; lint, typecheck, prettier and build are clean.
 - Human test **passed** on 2026-11-17, with no bugs and axes at constant screen size across zoom (`11-…`).
 - **Waiting on Ricardo:** posting the issue (`10-…`), then opening the PR.
-- Attitude test data for visual checks: `mockup-digital-twin/attitude-test-data/` (3 profiles, self-checked).
+- Attitude test data: `mockup-digital-twin/attitude-test-data/`. All 3 profiles (LVLH nadir, inertial on a 10° orbit,
+  Lisbon tracking) were **manually validated by Ricardo**.
+- PR description ready to paste: `14-…`.
 - Issue log started: `13-…` (base layer reset on option change, priority 2/10).
 - Not yet started: PR 1b (adapter refactor, `06-…`).
 

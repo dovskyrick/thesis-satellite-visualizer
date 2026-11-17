@@ -29,8 +29,9 @@ format is unchanged.
   outside the data time range, listener cleanup, no crash before the viewer is ready), and the panel option
   (hidden by default, shown with the configured length when enabled). Resium is mocked as in the existing test.
 - `lint`, `typecheck` and `test:ci` pass, and the existing smoke test is unchanged.
-- **Manual check in Grafana:** with the provisioned TestData dashboard, plus synthetic data with known
-  attitudes (nadir-pointing LVLH, and pointing at a ground location). The axes pointed as expected,
+- **Manual check in Grafana:** with the provisioned TestData dashboard, plus synthetic trajectories with
+  known attitudes: nadir-pointing LVLH, inertially fixed (identity quaternion), and pointing at a ground
+  location. All three pointed as expected, which also exercises the existing ECI → ECEF conversion. The axes
   kept their screen size across zoom, worked in Point and Model mode, and disappeared outside the data range.
 
 ## Not included / open questions
