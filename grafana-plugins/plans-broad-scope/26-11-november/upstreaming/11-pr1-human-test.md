@@ -54,3 +54,22 @@ TestData dashboard). **Successful, no bugs found.** The body axes keep a constan
 at every zoom level, which is the intended behaviour (length is set in pixels). Next: post the
 issue (`10-…`) and open the PR. For deeper attitude checks, use the profiles in
 `mockup-digital-twin/attitude-test-data/` (LVLH nadir, inertial, Lisbon tracking).
+
+## Attitude profiles (2026-11-17)
+
+Ricardo loaded the three CSVs from `mockup-digital-twin/attitude-test-data/`.
+
+- **A (LVLH nadir): passed.** Z points down, X along the track.
+- **C (Lisbon tracking): passed.** Z points at the Lisbon marker.
+- **B (inertial): looked wrong.** Ricardo expected static axes, and they visibly moved.
+
+**Likely explanation, not a bug:** the data is right. Re-checked numerically, Z stays within 0.15° of
+Earth's axis on every row, and that 0.15° is precession since J2000. The plugin uses `tracked={true}`, so the camera
+follows the satellite's local frame. Inertial axes then *have* to swing on screen: Z is ~10° from
+local up near the north pole, ~90° at the equator and ~170° near the south pole. A and C look calm
+because they are tied to the local frame. The B section in the data README now gives the correct
+criterion (Z parallel to the globe's polar axis).
+
+**Decision:** the PR 1 manual tests are archived as **successful**. A and C are harder and depend on
+the same ECI → ECEF code as B, so they already exercise it. If a retest of B with the new criterion still fails,
+treat it as a data or test-design problem, not a plugin bug.

@@ -34,10 +34,10 @@ axes turn once per orbit together with the satellite, like a plane flying level.
 
 ## Profile B: inertial (identity quaternion)
 
-The quaternion is `0,0,0,1`, so the body axes are the ECI axes. **Look for:** Z parallel to
-Earth's spin axis (towards the north pole direction) everywhere on the orbit, including over
-the south. The axes keep the same direction in space. Against the rotating Earth they drift
-about 15° per hour around Z. This profile tests Lucas's ECI → ECEF conversion directly.
+The quaternion is `0,0,0,1`, so the body axes are the ECI axes. They are fixed in *space*, not on
+screen. Lucas's camera tracks the satellite in its local frame, so on screen B appears to tumble once per orbit.
+**Look for:** Z parallel to the globe's north–south axis. It points almost straight up near the north pole (~10° off),
+lies flat pointing north at the equator, and points into the Earth near the south pole (~170° off).
 
 ## Profile C: Lisbon tracking
 
