@@ -46,3 +46,11 @@ attitude even without a 3D model.
 
 Note anything odd: colour, label overlap with the model, default length 100 too
 short or long, flicker. I'll adjust before you open the PR.
+
+## Result (2026-11-17): passed
+
+Ricardo ran the manual test on `feat/body-axes` (WSL, `npm run dev` + `docker compose up`,
+TestData dashboard). **Successful, no bugs found.** The body axes keep a constant screen size
+at every zoom level, which is the intended behaviour (length is set in pixels). Next: post the
+issue (`10-…`) and open the PR. For deeper attitude checks, use the profiles in
+`mockup-digital-twin/attitude-test-data/` (LVLH nadir, inertial, Lisbon tracking).

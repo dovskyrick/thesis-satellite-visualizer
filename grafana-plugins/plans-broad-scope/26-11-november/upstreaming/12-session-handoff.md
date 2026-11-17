@@ -16,7 +16,10 @@ If a repo was renamed on GitHub, the old URL redirects. Attach it with `add_repo
 ## Current state
 
 - PR 1 (body axes) is implemented, commit `ae4a246`. 18/18 tests pass; lint, typecheck, prettier and build are clean.
-- **Waiting on Ricardo:** human test (`11-…`), posting the issue (`10-…`), then opening the PR.
+- Human test **passed** on 2026-11-17, with no bugs and axes at constant screen size across zoom (`11-…`).
+- **Waiting on Ricardo:** posting the issue (`10-…`), then opening the PR.
+- Attitude test data for visual checks: `mockup-digital-twin/attitude-test-data/` (3 profiles, self-checked).
+- Issue log started: `13-…` (base layer reset on option change, priority 2/10).
 - Not yet started: PR 1b (adapter refactor, `06-…`).
 
 ## Decisions already made (don't re-ask)
@@ -43,7 +46,8 @@ If a repo was renamed on GitHub, the old URL redirects. Attach it with `add_repo
 1. Does the glTF model frame match the body frame in his data? (The Duck doesn't line up with the axes.)
 2. Settings that only appear when the data supports them, via `showIf(options, data)` (`06-…`).
 3. Sensor definition format: a panel-option editor instead of `meta.custom`.
-4. Is the attitude quaternion active or passive in OSTk convention? (Future rotation tests.)
+4. Is the attitude quaternion active or passive in OSTk convention? The plugin code uses it as body→ECI
+   (`R(q)·v_B = v_ECI`). The attitude test data follows that. Confirm it matches OSTk's `q_B_GCRF`.
 
 ## Next actions for Claude
 

@@ -19,6 +19,7 @@ one feature per pull request. This branch (`upstreaming`) only holds planning ma
 | `09-open-space-collective-practices.md` | House practices of Lucas's organisation |
 | `10-pr1-issue-draft.md` | Issue text to open before the body-axes PR |
 | `11-pr1-human-test.md` | Ricardo's manual test checklist for body axes |
+| `13-issue-log.md` | Small upstream issues found along the way, with priority (1–10) |
 | `12-session-handoff.md` | **Start here in a new chat:** state, decisions, gotchas, next actions |
 
 ## Two sides, two standards
