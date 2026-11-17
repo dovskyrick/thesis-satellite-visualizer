@@ -38,9 +38,13 @@ format is unchanged.
 
 - **No new E2E test.** Whether the axes point the right way is hard to assert in Playwright, so I
   relied on unit tests plus a manual check. Happy to add one if you'd prefer.
-- **Model frame:** the sample Duck glTF doesn't line up with the body axes. I assume its model frame
-  differs from the body frame. Is that expected for the assets you use?
-- **Quaternion convention:** the code uses `q_B_ECI` as body → ECI (`v_ECI = R(q) v_B`). I matched
-  that. Could you confirm this is the OSTk convention?
 
 Feedback welcome. I'm happy to change naming, defaults or scope.
+
+---
+
+## Notes (2026-11-17)
+
+Ricardo removed the model-frame and quaternion-convention questions before submitting. In his
+view the Duck *is* oriented consistently with the attitude. Its centre of mass is just offset from the entity
+origin, and Point mode shows the axes centred correctly. These can go back to Lucas later if needed.
