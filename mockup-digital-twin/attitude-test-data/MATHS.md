@@ -64,6 +64,9 @@ r = a (cos u P̂ + sin u Q̂)        v̂ = −sin u P̂ + cos u Q̂        ĥ = 
 `t_mid` (`s = Cᵀ s_ECEF`), with declination `δ` and right ascension `α`. An ascending pass
 through it needs `sin u₀ = sin δ / sin i` and `Ω = α − atan2(cos i sin u₀, cos u₀)`.
 
+**Profile B orbit.** Same maths with `i = 10°` and target `(lat 0°, lon −9.1393°)`, so `u₀ = 0`.
+Its inertial Z then stays 80–100° from local up, flat and pointing north.
+
 **Row output.** `r_ECEF = C(t) r`, then an iterative ECEF → WGS-84 geodetic
 conversion (Bowring start, 5 iterations, < 1 mm). This is the exact inverse of `Cartesian3.fromDegrees`, so
 the plugin recreates our ECEF point.

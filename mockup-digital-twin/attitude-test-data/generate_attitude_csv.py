@@ -6,7 +6,7 @@ Columns: time, longitude, latitude, altitude, q_B_ECI_X, q_B_ECI_Y, q_B_ECI_Z, q
 
 Profiles (see MATHS.md):
   A  lvlh-nadir     Z to Earth's centre, X along track, Y = -orbit normal
-  B  inertial       identity: body axes = ECI axes (Z parallel to Earth's spin axis)
+  B  inertial       identity: body axes = ECI axes (Z parallel to Earth's spin axis), 10 deg orbit
   C  lisbon-track   Z points at Lisbon, X as close to the velocity as possible
 
 Pure Python standard library. Usage:
@@ -27,6 +27,7 @@ WGS84_F = 1 / 298.257223563
 WGS84_E2 = WGS84_F * (2 - WGS84_F)
 ALTITUDE_KM = 500.0
 INCLINATION_DEG = 97.4
+EQUATORIAL_INCLINATION_DEG = 10.0
 LISBON = {"name": "Lisbon", "latitude": 38.7223, "longitude": -9.1393, "altitude": 0.0}
 ARCSEC = math.pi / (180 * 3600)
 CHECK_TOLERANCE_DEG = 0.01
@@ -177,12 +178,12 @@ def axes_to_quaternion(x_axis, y_axis, z_axis):
 # --- Orbit (MATHS.md section 4) --------------------------------------------------------------- #
 
 
-def make_orbit(t_mid_ms):
-    """Circular orbit whose ascending pass is right above Lisbon (geocentric) at t_mid."""
+def make_orbit(t_mid_ms, inclination_deg=INCLINATION_DEG, lon_deg=LISBON["longitude"], lat_deg=LISBON["latitude"]):
+    """Circular orbit whose ascending pass is right above (lon, lat) (geocentric) at t_mid. Default: Lisbon."""
     a_km = WGS84_A_M / 1000 + ALTITUDE_KM
     n = math.sqrt(MU_KM3_S2 / a_km**3)  # rad/s
-    inc = math.radians(INCLINATION_DEG)
-    s_ecef = unit(geodetic_to_ecef(LISBON["longitude"], LISBON["latitude"], 0.0))
+    inc = math.radians(inclination_deg)
+    s_ecef = unit(geodetic_to_ecef(lon_deg, lat_deg, 0.0))
     s_eci = mat_vec(transpose(eci_to_ecef(t_mid_ms)), s_ecef)
     dec, ra = math.asin(s_eci[2]), math.atan2(s_eci[1], s_eci[0])
     u0 = math.asin(math.sin(dec) / math.sin(inc))
@@ -241,7 +242,7 @@ def expected_z_lisbon(t_ms, r_eci):
 
 PROFILES = [
     ("A-lvlh-nadir", "A. LVLH nadir pointing", attitude_lvlh_nadir, expected_z_lvlh),
-    ("B-inertial", "B. Inertial (identity)", attitude_inertial, expected_z_inertial),
+    ("B-inertial-equatorial", "B. Inertial (identity), 10° orbit", attitude_inertial, expected_z_inertial),
     ("C-lisbon-track", "C. Lisbon tracking", attitude_lisbon_track, expected_z_lisbon),
 ]
 
@@ -317,14 +318,20 @@ def main():
     args = parser.parse_args()
 
     t_start_ms = int(datetime.fromisoformat(args.start.replace("Z", "+00:00")).timestamp() * 1000)
-    # Lisbon pass happens half an orbit after the start, so the data is one orbit centred on it.
+    # Pass happens half an orbit after the start. A and C fly over Lisbon (97.4 deg). B crosses the
+    # equator below Lisbon on a 10 deg orbit, so its inertial Z stays flat, pointing north (MATHS.md 4).
     _, period_s = make_orbit(t_start_ms)
-    state, period_s = make_orbit(t_start_ms + int(period_s * 500))
+    t_mid_ms = t_start_ms + int(period_s * 500)
+    orbits = {
+        "lisbon": make_orbit(t_mid_ms),
+        "equatorial": make_orbit(t_mid_ms, EQUATORIAL_INCLINATION_DEG, LISBON["longitude"], 0.0),
+    }
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     csv_by_profile, t_end_ms = {}, t_start_ms
     for slug, title, attitude, expected_z in PROFILES:
+        state, period_s = orbits["equatorial" if slug.startswith("B") else "lisbon"]
         rows = generate_rows(t_start_ms, args.step, state, period_s, attitude)
         worst = self_check(rows, expected_z)
         csv_text = HEADER + "\n" + "\n".join(rows) + "\n"

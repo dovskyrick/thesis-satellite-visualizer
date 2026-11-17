@@ -73,3 +73,7 @@ criterion (Z parallel to the globe's polar axis).
 **Decision:** the PR 1 manual tests are archived as **successful**. A and C are harder and depend on
 the same ECI → ECEF code as B, so they already exercise it. If a retest of B with the new criterion still fails,
 treat it as a data or test-design problem, not a plugin bug.
+
+**Update:** Ricardo re-checked B fully zoomed out, and it is almost certainly correct. For an easier
+retest, B now flies a 10° near-equatorial orbit (`B-inertial-equatorial.csv`). Z stays flat, pointing north (80–100°
+from local up), and X/Y turn around it once per orbit.
