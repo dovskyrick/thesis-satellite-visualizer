@@ -1,6 +1,6 @@
 # 14 — PR 1 description (paste into GitHub)
 
-Paste the block below into the PR description box. Replace `#<n>` with the issue number from `10-…`.
+Paste the block below into the PR description box. The issue is open-space-collective/satellite-visualizer#15.
 
 ---
 
@@ -8,7 +8,7 @@ Paste the block below into the PR description box. Replace `#<n>` with the issue
 
 **Body:**
 
-Closes #<n>
+Closes #15
 
 ## What
 
